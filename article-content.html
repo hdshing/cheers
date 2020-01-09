@@ -27,25 +27,13 @@
 
     
     <div class="article_content">
-        <h1 class="article_content_title">說到威士忌，讓你想到了哪個城市呢？</h1>
-        <p class="article_content_time">2019-12-20</p>
+        <!-- 标题 -->
+        <h1 class="article_content_title"></h1> 
+        <!-- 日期 -->
+        <p class="article_content_time"></p>
+        <!-- 内容 -->
         <div class="article_edit">
-            <!-- 數據 -->
-            <p> 1.現存最古老的威士忌相信是基拿雲利口威士忌(Glenavon Special Liqueur Whisky)。攄說該酒的裝瓶時間在1851-1858 年之間，產自蘇格蘭的基拿雲蒸餾酒廠(Glenavon Distillery)，並在近年躋身吉尼斯世界紀錄(Guinness World Record) 榜單。
-                    2. 威士忌通常在多孔的橡木桶中熟成，並逐年蒸發，酒精蒸汽會導致橡木桶所在地方的天花板被熏黑。
-                    3. 威士忌本身純淨無色，其色澤和風味皆來自用於熟成的橡木桶以及外來添加物，如焦糖。廉價的威士忌多含有焦糖，它主要影 響威士忌的顏色而非風味。
-                    4. 威士忌的單詞拼寫不壹。有這麽壹個約定俗成的規則:來自加拿大、日本和蘇格蘭的威士忌叫“whisky”，而美國、愛爾蘭和 英格蘭的威士忌都叫“whiskey”。相傳蘇格蘭去掉“whiskey”中的“e”是因為蘇格蘭人認為發音太長會耽誤暍酒時間。
-                    5. 單壹純麥威士忌(Single Malt Whisky)越來越受歡迎，但由於供不應求，生產商可能會選擇縮短單壹純麥威士忌陳釀時 間。
-                    6. 全球共有23個國家或地區生產威士忌。其中，蘇格蘭、美國和日本的產量位列前三。
-                    7. 雖然威士忌加冰是壹種流行暍法，但部分威士忌愛好者認為冰塊會使酒的風味變淡。所以，如果妳硬要往裏面加些什麽，那就 加入少許礦泉水吧。
-                    8. 威士忌其S就是沒有啤酒花的“蒸餾啤酒”。用以釀造威士忌的麥芽漿甶麥芽汁、酵母和水組成，其初始發酵過程與啤酒相 同。
-                    純麥芽威士忌實用指南
-                    雖然純麥芽威士忌只占大概20%(剰下80%都是混合威士忌)，但各種牌子卻是多如牛毛。市場份額最大的四種是Glenfiddich， Glenlivet, Glenmorangie，和 Macallan〇
-                    壹般純麥芽威士忌都是12年以上，少數有10年的。往上有15, 18, 21, 25年。價錢比同年份的混合威士忌貴。 除了用oak桶外，還有用其它木頭來做成有特殊味道的威士忌，如sherry，port等。非本人所喜。
-                    因為是single malt,所以每種威士忌都各具特色，而且比較明顯。本人比較喜歡Glenmorangie和Macallan。
-                    有興趣的，可以從這4種開始。同時對比著和兩種以上，品嘗其不同。 目前世界上最流行的，牌子最多的是蘇格蘭威士忌。根據國際法，只有在蘇格蘭境內蒸餾和醇化的才能配為蘇格蘭威士忌。所有
-                    蘇格蘭威士忌均以三種天然原料釀制而成:谷物、水和醇母，需經歷最少3年的醇化過程。蘇格蘭威士忌的原料至少60%是來自 於谷類，而其余部分則被加入麥芽。加入的麥芽是釀制威士忌的關鍵，各個釀酒商以此來達到其威士忌在口味方面的平衡，從而
-                    產生其獨特的香味。</p>
+            
         </div>
     </div>
 
@@ -54,5 +42,43 @@
 	<script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="js/swiper.min.js" type="text/javascript"></script>
     <script src="js/cheers.js" type="text/javascript"></script>
+
+
+    <script>
+        $(function(){
+            // 子页跳首页-获取url值
+            var aId = getURLParameter('aId');
+            console.log(aId);
+            
+            // 文章列表
+            var  filed = {
+                ID : aId
+            }
+            $.ajax({
+
+                type: "POST",
+                url: "http://test.atomtechnology.com.hk/News/Detail",
+                dataType: "json",
+                data: filed,
+                
+                success: function (msg) {
+                    
+                    console.log("文章内容");
+                    console.log(msg);
+                    
+
+                    $(".article_content_title").append(''+msg.Data[0].Title);
+                    $(".article_content_time").append(''+msg.Data[0].TimeCreated);
+                    $(".article_edit").append(''+msg.Data[0].Content);
+                },
+                error : function() {
+                    // alert("异常！");
+                }
+            });
+
+
+
+        })
+    </script>
 </body>
 </html>

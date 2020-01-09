@@ -34,32 +34,20 @@
             <div class="shop_detail_imgbox">
                 <!-- Swiper -->
                 <div class="swiper-container gallery-top">
-                    <div class="swiper-wrapper">
+                    <div class="swiper-wrapper shop_detail_topimg">
+                        <!-- 
                         <div class="swiper-slide" style="background-image:url(./images/shop_detail1.png)"></div>
                         <div class="swiper-slide" style="background-image:url(./images/shop_detail2.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail1.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail2.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail1.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail2.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail1.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail2.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail1.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail2.png)"></div>
+                         -->
                     </div>
                 </div>
     
                 <div class="swiper-container gallery-thumbs hide_mo">
-                    <div class="swiper-wrapper">
+                    <div class="swiper-wrapper shop_detail_thumbsimg">
+                        <!--                         
                         <div class="swiper-slide" style="background-image:url(./images/shop_detail1.png)"></div>
                         <div class="swiper-slide" style="background-image:url(./images/shop_detail2.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail1.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail2.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail1.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail2.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail1.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail2.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail1.png)"></div>
-                        <div class="swiper-slide" style="background-image:url(./images/shop_detail2.png)"></div>
+                         -->
                     </div>
                 </div>
     
@@ -67,37 +55,21 @@
     
     
             <div class="shop_detail_txtbox">
-                <h2 title="華岸酒吧扒房 The China Coast Bar + Grill">華岸酒吧扒房 The China Coast Bar + Grill</h2>
-                <!-- <div class="detail_txtinfo">
-                    <div><img src="images/shop_location.png" alt=""></div>
-                    <div>香港國際機場1號客運大樓5樓抵港層禁區5E517A號店舖</div>
-                </div>
-                <div class="detail_txtinfo">
-                    <div><img src="images/shop_time.png" alt=""></div>
-                    <div>
-                        <p>星期一至五 12:00-02:00</p>
-                        <p>星期六至天 10:00-03:00</p>
-                    </div>
-                </div>
-
-                <div class="detail_txtinfo">
-                    <div><img src="images/shop_tel.png" alt=""></div>
-                    <div>22866898</div>
-                </div> -->
+                <h2 class="shop_title">&nbsp;</h2>
                 <div class="detail_txtinfo detail_location">
-                    <p>香港國際機場1號客運大樓5樓抵港層禁區5E517A號店舖</p>
+                    <p>&nbsp;</p>
                 </div>
                 <div class="detail_txtinfo detail_time">
-                    <p>星期一至五 12:00-02:00</p>
-                    <p>星期六至天 10:00-03:00</p>
+                    <p>&nbsp;</p>
                 </div>
 
                 <div class="detail_txtinfo detail_tel">
-                    <p>22866898</p>
+                    <p>&nbsp;</p>
                 </div>
 
                 <div id="detail_py" class="swiper-container">
                     <div class="swiper-wrapper">
+<!--                         
                         <div class="swiper-slide">
                             <img src="images/service_hao.png" alt="">
                             <p>服務好</p>
@@ -128,7 +100,7 @@
                             <p>服務好</p>
                             <p>32</p>
                         </div>
-                        
+                         -->
                     </div>
                 </div>
 
@@ -177,23 +149,6 @@
 
     <!-- Initialize Swiper -->
     <script>
-        var galleryThumbs = new Swiper('.gallery-thumbs', {
-            spaceBetween: 8,
-            slidesPerView: 5,
-            freeMode: true,
-            watchSlidesVisibility: true,
-            watchSlidesProgress: true,
-        });
-        var galleryTop = new Swiper('.gallery-top', {
-            spaceBetween: 10,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            thumbs: {
-                swiper: galleryThumbs
-            }
-        });
 
         // 店铺详情-评价
         var mySwiper2 = new Swiper('#detail_py', {
@@ -204,6 +159,79 @@
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
+        });
+
+        document.cookie = "showShop=1";
+        console.log("cookie_showShop="+getCookie("showShop"));
+
+
+        var shopId = getURLParameter('shopId');
+        var lng = getURLParameter('lng');
+        var lat = getURLParameter('lat');
+        console.log(shopId);
+        console.log(lng);
+        console.log(lat);
+
+        // 店铺详情
+        var  filed = {
+            ID : shopId,
+            Lng : lng,
+            Lat : lat
+        }
+        $.ajax({
+            type: "POST",
+            url: "http://test.atomtechnology.com.hk/Item/Detail",
+            dataType: "json",
+            data: filed,
+            
+            success: function (msg) {
+
+                // 店铺名
+                $('.shop_title').text(msg.Data[0].ItemDetail.ItemName);
+                // 地址
+                if(msg.Data[0].ItemDetail.Address != ''){
+                    $('.detail_location p').text(msg.Data[0].ItemDetail.Address);
+                }
+                // 开门时间
+                if(msg.Data[0].ItemDetail.TimeOpen != ''){
+                    $('.detail_time p').text(msg.Data[0].ItemDetail.TimeOpen);
+                }
+                // 电话
+                if(msg.Data[0].ItemDetail.Tel != ''){
+                $('.detail_tel p').text(msg.Data[0].ItemDetail.Tel);
+                }
+                // 店铺图片
+                for(var i=0; i<msg.Data[0].ItemSlideList.length; i++){
+                    $(".shop_detail_topimg").append('<div class="swiper-slide" style="background-image:url('+msg.Data[0].ItemSlideList[i].Image+')"></div>');
+                    $(".shop_detail_thumbsimg").append('<div class="swiper-slide" style="background-image:url('+msg.Data[0].ItemSlideList[i].Image+')"></div>')
+                }
+
+                console.log("详情内容");
+                console.log(msg);
+                
+                // 店铺图片-滑动图
+                var galleryThumbs = new Swiper('.gallery-thumbs', {
+                    spaceBetween: 8,
+                    slidesPerView: 5,
+                    freeMode: true,
+                    watchSlidesVisibility: true,
+                    watchSlidesProgress: true,
+                });
+                var galleryTop = new Swiper('.gallery-top', {
+                    spaceBetween: 10,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    thumbs: {
+                        swiper: galleryThumbs
+                    }
+                });
+
+            },
+            error : function() {
+                // alert("异常！");
+            }
         });
 
     </script>
