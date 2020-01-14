@@ -1,21 +1,21 @@
 $(function(){
     // 初始隱藏找店、優惠板塊
-    // $(".article_list").hide();
-    $(".shop_list").hide();
-    $(".coupon_list").hide();
+    // $(".article_model").hide();
+    $(".shop_model").hide();
+    $(".coupon_model").hide();
     $(".list_menu span").click(function(){
         $(".list_menu span").removeClass("selected_menu");
         $(this).addClass("selected_menu");
-        $(".article_list,.shop_list,.coupon_list").hide();
-        var showList = $(this).attr("id") + "list";
+        $(".article_model,.shop_model,.coupon_model").hide();
+        var showList = $(this).attr("id") + "model";
         $("."+showList).show();
     })
 
 
     // 手机-menu
     $(".mobile_menu li").click(function(){
-        $(".article_list,.shop_list,.coupon_list").hide();
-        var showList = $(this).attr("id") + "_list";
+        $(".article_model,.shop_model,.coupon_model").hide();
+        var showList = $(this).attr("id") + "_model";
         $("."+showList).show();
         $(".mobile_menu").hide();
     })
@@ -31,6 +31,45 @@ $(function(){
         $('.mobile_menu').fadeOut();
     });
     
+
+
+
+    var jing;   // 经度
+    var wei;    // 纬度
+
+    jing = getCookie("lng");
+    wei = getCookie("lat");
+    console.log("js经度="+jing);
+    console.log("js纬度="+wei);
+
+    var shopId = '';
+    var shop_num = 0;
+    $(".shop_menu div span").each(function(){
+        $(this).click(function(){
+            var val = $(this).attr("val_id")+",";
+            if ($(this).hasClass("selected_menu")) {
+                $(this).removeClass("selected_menu");
+                console.log("前"+shopId);
+                shopId = shopId.replace(val,"");
+                console.log(shopId);
+                --shop_num;
+            } else {
+                if(shop_num < 3){
+                    $(this).addClass("selected_menu");
+                    shopId = shopId + val;
+                    console.log(shopId);
+                    ++shop_num;
+                }else{
+                    alert("最多選擇3個")
+                }
+            }
+
+            var final_shop = shopId.substr(0,shopId.length-1);
+            console.log("最终"+final_shop);
+
+            shopData(jing,wei,final_shop,12,1);
+        })
+    })
 
 
 })
@@ -177,6 +216,8 @@ function bannerData(){
 
 // 文章列表-调取数据（栏目ID，排序【0：最新，1：最近】，页数）
 function articleData(categoryID,val_pp,val_p){
+    var size = 10;  // 显示
+
     var  filed = {
         CategoryID : categoryID,
         pp : val_pp,
@@ -199,6 +240,45 @@ function articleData(categoryID,val_pp,val_p){
 
             console.log("文章");
             console.log(msg);
+
+
+            var totaldata = msg.Pages.Total;
+            $('.M-box').pagination({
+                totalData: totaldata,
+                showData:size,
+                mode: 'fixed',
+                jump: true,
+                callback:function (val) {
+                    var pag=  val.getCurrent();
+                    console.log(pag);
+
+                    var  filed = {
+                        CategoryID : categoryID,
+                        pp : size,
+                        p : pag
+                    }
+                    $.ajax({
+
+                        type: "POST",
+                        url: "http://test.atomtechnology.com.hk/News/Listing",
+                        dataType: "json",
+                        data: filed,
+                        
+                        success: function (msg) {
+                            $(".article_list").empty();
+                
+                            for(var i=0; i<msg.Data.length; i++){
+                                $(".article_list").append('<div class="article_box"><div class="article_text"><h1><a href="article-content.html?aId='+msg.Data[i].ID+'">'+msg.Data[i].Title+'</a></h1><p class="article_time">'+msg.Data[i].TimeCreated+'</p><p class="article_readme">'+msg.Data[i].Description+'</p></div><div class="article_img" style="background-image:url('+msg.Data[i].ImageUrl+')"><a href="article-content.html?aId='+msg.Data[i].ID+'"></a></div></div>')
+                
+                            }
+
+                        },
+                        error : function() {
+                            // alert("异常！");
+                        }
+                    });
+                }
+            });
             
         },
         error : function() {
@@ -207,10 +287,10 @@ function articleData(categoryID,val_pp,val_p){
     });
 }
 
-
-
 // 找店模块-调取数据（经度，纬度，类别ID，每页条数，页数）
 function shopData(lng,lat,Categoryid,val_pp,val_p){
+    var size = 12;  // 显示
+
     var  filed = {
         Lng : lng,
         Lat : lat,
@@ -238,6 +318,50 @@ function shopData(lng,lat,Categoryid,val_pp,val_p){
             console.log("找店");
             console.log(msg);
             
+
+
+            var totaldata = msg.Pages.Total;
+            $('.M-box1').pagination({
+                totalData: totaldata,
+                showData:size,
+                mode: 'fixed',
+                jump: true,
+                coping : true,
+                callback:function (val) {
+                    var pag=  val.getCurrent();
+                    console.log(pag);
+
+                    var  filed = {
+                        Lng : lng,
+                        Lat : lat,
+                        Categoryid : Categoryid,
+                        pp : size,
+                        p : pag
+                    }
+                    $.ajax({
+
+                        type: "POST",
+                        url: "http://test.atomtechnology.com.hk/Category/ItemList",
+                        dataType: "json",
+                        data: filed,
+                        
+                        success: function (msg) {
+                            
+                            $(".shop_list_box").empty();
+                            for(var i=0; i<msg.Data.length; i++){
+
+                                $(".shop_list_box").append('<div class="shop_box"><div class="shop_imgbox" style="background-image:url('+msg.Data[i].ImageUrl+')"><a href="shop-detail.html?shopId='+msg.Data[i].ItemID+'&lng='+lng+'&lat='+lat+'"></a></div><div class="shop_weizhi">'+msg.Data[i].AreaName+'</div><div class="shop_txt"><a href="shop-detail.html?shopId='+msg.Data[i].ItemID+'&lng='+lng+'&lat='+lat+'"><h1 title="'+msg.Data[i].ItemName+'">'+msg.Data[i].ItemName+'</h1></a><div class="shop_lysc"><span>距離:'+msg.Data[i].Distance+'km</span></div><span class="tisp_txt tisp_txt'+msg.Data[i].IsDiscount+'">惠</span></div></div>')
+
+                            }
+
+                        },
+                        error : function() {
+                            // alert("异常！");
+                        }
+                    });
+                }
+            });
+
         },
         error : function() {
             // alert("异常！");

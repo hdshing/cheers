@@ -1,7 +1,7 @@
 *{
-    padding:0;
-    margin: 0;
-    bottom: 0;
+    padding:0px;
+    margin:0px;
+    border:0px;
 }
 html{
     font-size: 625%;
@@ -595,10 +595,9 @@ a{
     .mobile_menu{
         position: fixed;
         background-color: #fff;
-        top:0.45rem;
+        top:0.48rem;
         right:0;
         width:30%;
-        height:1.1rem;
         padding:0.05rem 4%;
         text-align: right;
         list-style: none;
@@ -768,6 +767,5 @@ a{
     .article_content_title{
         font-size: 0.18rem;
     }
-    .article_content_time{
-    }
+    
 }

@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="format-detection" content="telephone=no"> 
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>喝吧香港</title>
 
     <link href="css/swiper.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/pagination.css" rel="stylesheet" type="text/css"/>
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
 
 </head>
@@ -52,34 +55,51 @@
             <div><span id="article_" class="selected_menu">文章</span></div>
             <div><span id="shop_">找店</span></div>
             <div><span id="coupon_">優惠</span></div>
+<!-- 
+            <div><a href="index.html?id=article"><span id="article_" class="selected_menu">文章</span></a></div>
+            <div><a href="index.html?id=shop"><span id="shop_">找店</span></a></div>
+            <div><a href="index.html?id=coupon"><span id="coupon_">優惠</span></a></div> -->
         </div>
         <!-- 文章 -->
-        <div class="article_list">
-<!-- 
-            <div class="article_box">
-                <div class="article_text">
-                    <h1><a href="article-content.html">偷偷告訴你，每家啤酒廠都在改變現狀！</a></h1>
-                    <p class="article_time">2019-12-20</p>
-                    <p class="article_readme">行業的確會有不景氣的時候，各個廠的銷售額也會有波動，更別提新飲料潮流壹直暗戳戳的搶占大眾 視線(例如boozy seltzer塞爾脫茲礦泉汽水)。但是，精釀啤酒廠發生倒閉、收購的現象有個根本前提一一那就是精釀行業規模已經足夠龐大...</p>
+        <div class="article_model">
+            <div class="article_list">
+    <!-- 
+                <div class="article_box">
+                    <div class="article_text">
+                        <h1><a href="article-content.html">偷偷告訴你，每家啤酒廠都在改變現狀！</a></h1>
+                        <p class="article_time">2019-12-20</p>
+                        <p class="article_readme">行業的確會有不景氣的時候，各個廠的銷售額也會有波動，更別提新飲料潮流壹直暗戳戳的搶占大眾 視線(例如boozy seltzer塞爾脫茲礦泉汽水)。但是，精釀啤酒廠發生倒閉、收購的現象有個根本前提一一那就是精釀行業規模已經足夠龐大...</p>
+                    </div>
+                    <div class="article_img" style='background-image:url("images/article1.png")'><a href="article-content.html"></a></div>
                 </div>
-                <div class="article_img" style='background-image:url("images/article1.png")'><a href="article-content.html"></a></div>
+                 -->
             </div>
-             -->
+            <style>
+                .article_pager{
+                    position: relative;
+                    text-align: center;
+                }
+                
+            </style>
+            <nav class="article_pager">
+                <div class="M-box"></div>
+            </nav>
         </div>
+
         <!-- 找店 -->
-        <div class="shop_list">
+        <div class="shop_model">
 
             <div class="shop_nav">
                 <div class="shop_menu shop_pc">
-                    <div><span>咖啡</span></div>
-                    <div><span>清吧</span></div>
-                    <div><span>啤酒</span></div>
-                    <div><span>快飲</span></div>
-                    <div><span>茶</span></div>
-                    <div><span>酒行</span></div>
-                    <div><span>涼茶</span></div>
-                    <div><span>湯</span></div>
-                    <div><span>糖水</span></div>
+                    <div><span val_id="123">咖啡</span></div>
+                    <div><span val_id="121">清吧</span></div>
+                    <div><span val_id="125">啤酒</span></div>
+                    <div><span val_id="127">快飲</span></div>
+                    <div><span val_id="120">茶</span></div>
+                    <div><span val_id="122">酒行</span></div>
+                    <div><span val_id="124">涼茶</span></div>
+                    <div><span val_id="126">湯</span></div>
+                    <div><span val_id="128">糖水</span></div>
                 </div>
 
                 <div class="swiper-button-next hide_pc"></div>
@@ -119,35 +139,38 @@
      -->
             </div>
     
+            <div class="M-box1"></div>
         </div>
 
 
 
         <!-- 優惠 -->
-        <div class="coupon_list">
-            <div class="coupon_box" style='background-image:url("images/coupon1.png")'>
-                <div class="coupon_content">
-                    <div class="coupon_txt">
-                        <h2>星巴克咖啡 Starbucks coffee</h2>
-                        <p>有效期： 2019.12.24-2020.06.01</p>
-                    </div>
-                    <div class="coupon_num">
-                        <p>8.9<span>折</span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="coupon_box" style='background-image:url("images/coupon2.png")'>
-                <div class="coupon_content">
-                    <div class="coupon_txt">
-                        <h2>華岸酒吧扒房 The China Coast Bar</h2>
-                        <p>有效期： 2019.12.24-2020.06.01</p>
-                    </div>
-                    <div class="coupon_num">
-                        <p>200<span>HKD</span></p>
+        <div class="coupon_model">
+            <div class="coupon_list">
+                <div class="coupon_box" style='background-image:url("images/coupon1.png")'>
+                    <div class="coupon_content">
+                        <div class="coupon_txt">
+                            <h2>星巴克咖啡 Starbucks coffee</h2>
+                            <p>有效期： 2019.12.24-2020.06.01</p>
+                        </div>
+                        <div class="coupon_num">
+                            <p>8.9<span>折</span></p>
+                        </div>
                     </div>
                 </div>
+                <div class="coupon_box" style='background-image:url("images/coupon2.png")'>
+                    <div class="coupon_content">
+                        <div class="coupon_txt">
+                            <h2>華岸酒吧扒房 The China Coast Bar</h2>
+                            <p>有效期： 2019.12.24-2020.06.01</p>
+                        </div>
+                        <div class="coupon_num">
+                            <p>200<span>HKD</span></p>
+                        </div>
+                    </div>
+                </div>
+    
             </div>
-
         </div>
 
 
@@ -156,6 +179,7 @@
 
     
 	<script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+	<script src="js/jquery.pagination.js" type="text/javascript"></script>
     <script src="js/swiper.min.js" type="text/javascript"></script>
     <script src="js/cheers.js" type="text/javascript"></script>
     
@@ -192,31 +216,44 @@
             console.log('lng = '+lng);
             console.log('lat = '+lat);
 
-            // mobile子页跳首页-获取url值
-            if(getURLParameter('id') != null){
-                $(".article_list,.shop_list,.coupon_list").hide();
-                $("."+showId+"_list").show();
+
+            // 获取url值 判断显示哪个模块
+            var showId = getURLParameter('id');
+            if(showId != null){
+                $(".article_model,.shop_model,.coupon_model").hide();
+                $("."+showId+"_model").show();
+
+                // $(".list_menu span").removeClass("selected_menu");
+                // $("#"+showId+"_").addClass("selected_menu");
+
+                if(showId == 'shop'){
+                    shopData(lng,lat,'',12,1);
+                }
+                if(showId == 'coupon'){
+                    couponData(lng,lat,'',0,10,1);
+                }
             }
 
             // 判断识别页面从 店铺详情 返回主页 显示找店模块
             if(getCookie("showShop") == '1'){
                 $(".list_menu span").removeClass("selected_menu");
                 $("#shop_").addClass("selected_menu");
-                $(".article_list,.shop_list,.coupon_list").hide();
-                $(".shop_list").show();
+                $(".article_model,.shop_model,.coupon_model").hide();
+                $(".shop_model").show();
                 document.cookie = "showShop=0";
                 // 找店
-                shopData(lng,lat,'',12,1);
+                shopData(lng,lat,'',10,1);
             }
 
 
             // 找店
-            $("#shop_").click(function(){
-                shopData(lng,lat,'',12,1);
+            $("#shop_,#shop").click(function(){
+                shopData(lng,lat,'',10,1);
+                
             })
 
             // 优惠
-            $("#coupon_").click(function(){
+            $("#coupon_,#coupon").click(function(){
                 couponData(lng,lat,'',0,10,1);
             })
 
